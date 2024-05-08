@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/exchange.css">
+  </head>
+
+  <body id="page-top">
+    {% extends 'template.html' %} {% block content %}
+
+    <div class="row">
+        <div class="form-group">
+            <label for="currency">Currency</label>
+    
+            <div class="d-flex">
+                <!-- Select dropdown for accounts -->
+                <select class="form-control" id="account">
+                    {% for account in accounts %}
+                        <option value="{{ account.iban }}" data-currency="{{ account.currency }}">{{ account.iban }}</option>
+                    {% endfor %}
+                </select>
+    
+                <!-- Textbox to display the currency -->
+                <input type="text" class="form-control ml-2" id="currencyTextbox" readonly>
+            </div>
+    
+            <script>
+                $(document).ready(function () {
+                    // Event listener for the account selection change
+                    $('#account').on('change', function () {
+                        // Get the selected account's iban and currency
+                        var selectedOption = $(this).find('option:selected');
+                        var selectedIban = selectedOption.val();
+                        var selectedCurrency = selectedOption.data('currency');
+    
+                        // Update the currency textbox
+                        $('#currencyTextbox').val(selectedCurrency);
+                    });
+                });
+            </script>
+
+<div class="d-flex">
+    <!-- Select dropdown for accounts -->
+    <select class="form-control" id="account2">
+        {% for account in accounts %}
+            <option value="{{ account.iban }}" data-currency="{{ account.currency }}">{{ account.iban }}</option>
+        {% endfor %}
+    </select>
+
+    <!-- Textbox to display the currency -->
+    <input type="text" class="form-control ml-2" id="currencyTextbox2" readonly>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Event listener for the account selection change
+        $('#account2').on('change', function () {
+            // Get the selected account's iban and currency
+            var selectedOption = $(this).find('option:selected');
+            var selectedIban = selectedOption.val();
+            var selectedCurrency = selectedOption.data('currency');
+
+            // Update the currency textbox
+            $('#currencyTextbox2').val(selectedCurrency);
+        });
+    });
+</script>
+        </div>
+    </div>
+    
+
+    {% endblock %}
+  </body>
+</html>
